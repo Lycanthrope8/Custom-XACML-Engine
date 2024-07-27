@@ -5,8 +5,6 @@ class PAP {
 
     addPolicy(policyId, policyXml) {
         this.policies[policyId] = policyXml;
-        // console.log(`Policy added: ${policyId}`);
-        // console.log(policyXml);
     }
 
     getPolicy(policyId) {
