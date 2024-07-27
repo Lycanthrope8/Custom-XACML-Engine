@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XACML WebApp</title>
+</head>
+<body>
+    <h1>XACML WebApp</h1>
+    <div>
+        <h2>Add Policy</h2>
+        <textarea id="policyXml" rows="10" cols="50"></textarea><br>
+        <input type="text" id="policyId" placeholder="Policy ID">
+        <button onclick="addPolicy()">Add Policy</button>
+    </div>
+    <div>
+        <h2>Set Attribute</h2>
+        <input type="text" id="subjectId" placeholder="Subject ID"><br>
+        <input type="text" id="attributeId" placeholder="Attribute ID"><br>
+        <input type="text" id="attributeValue" placeholder="Value">
+        <button onclick="setAttributeInPIP()">Set Attribute</button>
+    </div>
+    <div>
+        <h2>Enforce Access</h2>
+        <input type="text" id="subject" placeholder="Subject"><br>
+        <input type="text" id="action" placeholder="Action"><br>
+        <input type="text" id="resource" placeholder="Resource">
+        <button onclick="enforceAccess()">Enforce Access</button>
+        <p id="decision"></p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
