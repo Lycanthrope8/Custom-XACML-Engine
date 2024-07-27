@@ -1,5 +1,3 @@
-Sure! Here is the restructured documentation:
-
 # XACML Web Application with Role-Based Access Control (RBAC)
 
 ## Overview
@@ -10,7 +8,7 @@ This web application demonstrates the use of XACML (eXtensible Access Control Ma
 
 1. **Clone the Repository**:
    ```bash
-   git clone [<repository-url>](https://github.com/Lycanthrope8/Custom-XACML-Engine.git)
+   git clone https://github.com/Lycanthrope8/Custom-XACML-Engine.git
    cd Custom-XACML-Engine
    ```
 
