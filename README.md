@@ -124,4 +124,72 @@ Stores attributes associated with subjects, managed by the PIP class.
 - Attributes are stored in a JSON file named `attributes.json` in the root directory.
 - The application uses `xml2js` for parsing XML policies and `fs` for file system operations.
 
-This documentation provides a brief overview of the files and their purposes, how to use the application, and instructions for running the application.
+## How to Test the XACML Engine
+
+To test the XACML engine, follow these steps:
+
+### Step 1: Add a Policy
+
+1. Go to the application interface at [http://localhost:3000](http://localhost:3000).
+2. In the "Add Policy" section, enter the policy XML and a unique policy ID. For example:
+
+   ```xml
+   <Policy>
+       <Rule Effect="Permit">
+           <Target>
+               <Subjects>
+                   <Subject>
+                       <AttributeValue>admin</AttributeValue>
+                   </Subject>
+               </Subjects>
+               <Actions>
+                   <Action>
+                       <AttributeValue>read</AttributeValue>
+                   </Action>
+               </Actions>
+               <Resources>
+                   <Resource>
+                       <AttributeValue>file123</AttributeValue>
+                   </Resource>
+               </Resources>
+           </Target>
+       </Rule>
+   </Policy>
+   ```
+
+3. Click "Add Policy" to save the policy.
+
+### Step 2: Set an Attribute
+
+1. In the "Set Attribute" section, enter the subject ID, attribute ID, and attribute value. For example:
+   - Subject ID: `user1`
+   - Attribute ID: `role`
+   - Attribute Value: `admin`
+
+2. Click "Set Attribute" to save the attribute.
+
+### Step 3: Enforce Access
+
+1. In the "Enforce Access" section, enter the subject, action, and resource. For example:
+   - Subject: `user1`
+   - Action: `read`
+   - Resource: `file123`
+
+2. Click "Enforce Access" to check if the access is permitted or denied. The decision will be displayed on the interface.
+
+### Example Scenarios
+
+#### Scenario 1: Permit Access
+
+- **Policy**: The example policy added in Step 1.
+- **Attribute**: `user1` has the `admin` role.
+- **Access Request**: `user1` wants to `read` `file123`.
+- **Expected Result**: Access is permitted.
+
+#### Scenario 2: Deny Access
+
+- **Policy**: The example policy added in Step 1.
+- **Attribute**: `user2` does not have any role set.
+- **Access Request**: `user2` wants to `read` `file123`.
+- **Expected Result**: Access is denied.
+
