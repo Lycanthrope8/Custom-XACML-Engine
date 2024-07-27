@@ -3,16 +3,19 @@ class PIP {
         this.attributes = {};
     }
 
-    setAttribute(subjectId, attributeId, value) {
+    setAttribute(subjectId, attributeId, attributeValue) {
         if (!this.attributes[subjectId]) {
             this.attributes[subjectId] = {};
         }
-        this.attributes[subjectId][attributeId] = value;
-        console.log(`Attribute set: ${subjectId}.${attributeId} = ${value}`);
+        this.attributes[subjectId][attributeId] = attributeValue;
     }
 
     getAttribute(subjectId, attributeId) {
         return this.attributes[subjectId] ? this.attributes[subjectId][attributeId] : null;
+    }
+
+    getRoles(subjectId) {
+        return this.attributes[subjectId] ? this.attributes[subjectId]['role'] : null;
     }
 }
 

@@ -18,7 +18,6 @@ class PDP {
                     return;
                 }
                 console.log(`Evaluating policy: ${policyId}`);
-                console.log(JSON.stringify(policy, null, 2)); // Log the entire policy object
                 const result = this.evaluatePolicy(policy, request);
                 console.log(`Policy evaluation result: ${result}`);
                 if (result === 'Permit') {
@@ -43,17 +42,21 @@ class PDP {
     }
 
     matchRule(rule, request) {
-        // Add logging to inspect the rule structure
-        console.log(`Rule: ${JSON.stringify(rule, null, 2)}`);
+        // Get roles from PIP
+        const roles = this.pip.getRoles(request.subject);
+        if (!roles) {
+            return false;
+        }
 
-        // Adjusting navigation according to the expected structure
         const subjectMatch = rule.Target[0].Subjects[0].Subject[0].AttributeValue[0];
         const actionMatch = rule.Target[0].Actions[0].Action[0].AttributeValue[0];
         const resourceMatch = rule.Target[0].Resources[0].Resource[0].AttributeValue[0];
 
+        console.log(`Matching rule for request: ${JSON.stringify(request)}`);
         console.log(`Subject match: ${subjectMatch}, Action match: ${actionMatch}, Resource match: ${resourceMatch}`);
+        console.log(`Roles: ${roles}`);
 
-        return request.subject === subjectMatch &&
+        return roles.split(',').includes(subjectMatch) &&
                request.action === actionMatch &&
                request.resource === resourceMatch;
     }
