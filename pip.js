@@ -26,12 +26,21 @@ class PIP {
         if (!this.attributes[subjectId]) {
             this.attributes[subjectId] = {};
         }
-        // Check for duplicate entry
-        if (this.attributes[subjectId][attributeId] === undefined) {
+
+        // Allow multiple roles for a subject
+        if (attributeId === 'role') {
+            if (!Array.isArray(this.attributes[subjectId][attributeId])) {
+                this.attributes[subjectId][attributeId] = [];
+            }
+            if (!this.attributes[subjectId][attributeId].includes(attributeValue)) {
+                this.attributes[subjectId][attributeId].push(attributeValue);
+                this.saveAttributes();
+            } else {
+                console.log(`Role ${attributeValue} for subject ${subjectId} already exists.`);
+            }
+        } else {
             this.attributes[subjectId][attributeId] = attributeValue;
             this.saveAttributes();
-        } else {
-            console.log(`Attribute ${attributeId} for subject ${subjectId} already exists.`);
         }
     }
 

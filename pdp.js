@@ -56,7 +56,8 @@ class PDP {
         console.log(`Subject match: ${subjectMatch}, Action match: ${actionMatch}, Resource match: ${resourceMatch}`);
         console.log(`Roles: ${roles}`);
 
-        return roles.split(',').includes(subjectMatch) &&
+        // Check if the subject's roles include the required role
+        return roles.includes(subjectMatch) &&
                request.action === actionMatch &&
                request.resource === resourceMatch;
     }
